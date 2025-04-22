@@ -10,6 +10,7 @@ Commands:
   install-host-routes   Set static routes on hosts
   switch-path north     Change OSPF weights to switch traffic path to the north
   switch-path south     Change OSPF weights to switch traffic path to the south
+  help                  Print this message
   exit|quit             Close the program, destructing all docker containers
 
   Ensure that create-topology is run before any other commands except exit.
@@ -23,7 +24,6 @@ def main():
 
     if args.h:
         print_help()
-        return
 
     while True:
         cmd = input(">>> ").strip()
@@ -38,6 +38,8 @@ def main():
             switch_path(path)
         elif cmd == "close-topology":
             destroy_topology()
+        elif cmd == "help":
+            print_help()
         elif cmd in {"exit", "quit"}:
             break
         else:
