@@ -10,6 +10,9 @@ Commands:
   switch-path north     Change OSPF weights to switch traffic path to the north
   switch-path south     Change OSPF weights to switch traffic path to the south
   exit|quit             Close the program, destructing all docker containers
+
+  Ensure that create-topology is run before any other commands except exit.
+  Ensure start-ospf has been run before using switch-path.
 """)
 
 def main():
@@ -17,8 +20,6 @@ def main():
     parser.add_argument("-h", action="store_true")
     args = parser.parse_args()
 
-    topology_created = False
-    ospf_started = False
 
     if args.h:
         print_help()
@@ -30,20 +31,11 @@ def main():
             create_topology()
             topology_created = True
         elif cmd == "start-ospf":
-            if not topology_created:
-                print("Error: You must create the topology first.")
-                continue
             start_ospf()
             ospf_started = True
         elif cmd == "install-host-routes":
-            if not topology_created:
-                print("Error: You must create the topology first.")
-                continue
             install_routes()
         elif cmd.startswith("switch-path"):
-            if not (topology_created and ospf_started):
-                print("Error: You must create the topology and start OSPF first.")
-                continue
             _, path = cmd.split()
             switch_path(path)
         elif cmd in {"exit", "quit"}:
