@@ -5,6 +5,7 @@ def print_help():
     print("""
 Commands:
   create-topology       Create the network topology
+  close-topology        Close and shut down the network topology
   start-ospf            Start and configure OSPF daemons
   install-host-routes   Set static routes on hosts
   switch-path north     Change OSPF weights to switch traffic path to the north
@@ -35,8 +36,9 @@ def main():
         elif cmd.startswith("switch-path"):
             _, path = cmd.split()
             switch_path(path)
-        elif cmd in {"exit", "quit"}:
+        elif cmd == "close-topology":
             destroy_topology()
+        elif cmd in {"exit", "quit"}:
             break
         else:
             print("Unknown command")
