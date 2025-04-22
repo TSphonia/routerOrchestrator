@@ -208,10 +208,30 @@ def switch_path(direction):
         r4_cost = 5
 
     # Change R2 costs
-    run(f"docker exec -i part1-r2-1 vtysh -c \"configure terminal; interface eth0; ip ospf cost {r2_cost}; exit; interface eth1; ip ospf cost {r2_cost}; exit; write memory\"")
+    r2_cmds = [
+        "configure terminal",
+        "interface eth0",
+        f"ip ospf cost {r2_cost}",
+        "exit",
+        "interface eth1",
+        f"ip ospf cost {r2_cost}",
+        "exit",
+        "write memory"
+    ]
+    run(f"docker exec -i part1-r2-1 vtysh " + " ".join(f"-c '{cmd}'" for cmd in r2_cmds))
 
     # Change R4 costs
-    run(f"docker exec -i part1-r4-1 vtysh -c \"configure terminal; interface eth0; ip ospf cost {r4_cost}; exit; interface eth1; ip ospf cost {r4_cost}; exit; write memory\"")
+    r4_cmds = [
+        "configure terminal",
+        "interface eth0",
+        f"ip ospf cost {r4_cost}",
+        "exit",
+        "interface eth1",
+        f"ip ospf cost {r4_cost}",
+        "exit",
+        "write memory"
+    ]
+    run(f"docker exec -i part1-r4-1 vtysh " + " ".join(f"-c '{cmd}'" for cmd in r4_cmds))
 
     print(f"Path successfully switched to {direction} path.")
 
