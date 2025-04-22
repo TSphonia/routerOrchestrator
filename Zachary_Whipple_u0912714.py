@@ -90,7 +90,6 @@ def configure_ospf_r1(container):
     interface eth2
      ip ospf cost 5
     exit
-    write memory
     """
     run(f"echo '{config_commands.strip()}' | sudo docker exec -i {container} vtysh")
 
@@ -110,7 +109,6 @@ def configure_ospf_r2(container):
     interface eth1
      ip ospf cost 5
     exit
-    write memory
     """
     run(f"echo '{config_commands.strip()}' | sudo docker exec -i {container} vtysh")
 
@@ -134,7 +132,6 @@ def configure_ospf_r3(container):
     interface eth2
      ip ospf cost 5
     exit
-    write memory
     """
     run(f"echo '{config_commands.strip()}' | sudo docker exec -i {container} vtysh")
 
@@ -154,7 +151,6 @@ def configure_ospf_r4(container):
     interface eth1
      ip ospf cost 50
     exit
-    write memory
     """
     run(f"echo '{config_commands.strip()}' | sudo docker exec -i {container} vtysh")
 
@@ -205,7 +201,6 @@ def switch_path(direction):
         "interface eth1",
         f"ip ospf cost {r2_cost}",
         "exit",
-        "write memory"
     ]
     run(f"docker exec -i part1-r2-1 vtysh " + " ".join(f"-c '{cmd}'" for cmd in r2_cmds))
 
@@ -218,7 +213,6 @@ def switch_path(direction):
         "interface eth1",
         f"ip ospf cost {r4_cost}",
         "exit",
-        "write memory"
     ]
     run(f"docker exec -i part1-r4-1 vtysh " + " ".join(f"-c '{cmd}'" for cmd in r4_cmds))
 
