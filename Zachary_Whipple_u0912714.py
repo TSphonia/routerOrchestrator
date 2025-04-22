@@ -20,7 +20,6 @@ def main():
     parser.add_argument("-h", action="store_true")
     args = parser.parse_args()
 
-
     if args.h:
         print_help()
         return
@@ -29,10 +28,8 @@ def main():
         cmd = input(">>> ").strip()
         if cmd == "create-topology":
             create_topology()
-            topology_created = True
         elif cmd == "start-ospf":
             start_ospf()
-            ospf_started = True
         elif cmd == "install-host-routes":
             install_routes()
         elif cmd.startswith("switch-path"):
