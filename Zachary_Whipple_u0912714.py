@@ -11,7 +11,7 @@ Commands:
   switch-path north     Change OSPF weights to switch traffic path to the north
   switch-path south     Change OSPF weights to switch traffic path to the south
   help                  Print this message
-  exit|quit             Close the program, destructing all docker containers
+  exit|quit             Close the program
 
   Ensure that create-topology is run before any other commands except exit.
   Ensure start-ospf has been run before using switch-path.
