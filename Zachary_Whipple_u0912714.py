@@ -103,8 +103,7 @@ def configure_ospf_r1(container):
     exit
     write memory
     """
-
-    run(f"docker exec -i {container} vtysh -c \"{'; '.join(line.strip() for line in config_commands.strip().splitlines())}\"")
+    run(f"echo '{config_commands.strip()}' | sudo docker exec -i {container} vtysh")
 
 def configure_ospf_r2(container):
     print(f"Configuring OSPF on {container}...")
@@ -124,7 +123,7 @@ def configure_ospf_r2(container):
     exit
     write memory
     """
-    run(f"docker exec -i {container} vtysh -c \"{'; '.join(line.strip() for line in config_commands.strip().splitlines())}\"")
+    run(f"echo '{config_commands.strip()}' | sudo docker exec -i {container} vtysh")
 
 def configure_ospf_r3(container):
     print(f"Configuring OSPF on {container}...")
@@ -148,7 +147,7 @@ def configure_ospf_r3(container):
     exit
     write memory
     """
-    run(f"docker exec -i {container} vtysh -c \"{'; '.join(line.strip() for line in config_commands.strip().splitlines())}\"")
+    run(f"echo '{config_commands.strip()}' | sudo docker exec -i {container} vtysh")
 
 def configure_ospf_r4(container):
     print(f"Configuring OSPF on {container}...")
@@ -168,7 +167,7 @@ def configure_ospf_r4(container):
     exit
     write memory
     """
-    run(f"docker exec -i {container} vtysh -c \"{'; '.join(line.strip() for line in config_commands.strip().splitlines())}\"")
+    run(f"echo '{config_commands.strip()}' | sudo docker exec -i {container} vtysh")
 
 def start_ospf():
     install_frr("part1-r1-1")
